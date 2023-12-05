@@ -57,20 +57,44 @@ public class CartDetailResController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/withdraw")
-    public ResponseEntity<?> withdrawCart(@RequestBody CartDetailQuantityDto cartDetailQuantityDto){
-        Product product=productService.findById(cartDetailQuantityDto.getIdCartDetail()).get();
+    @PatchMapping("/reduce")
+    public ResponseEntity<?> reduceQuantity(@RequestBody CartDetailQuantityDto cartDetailQuantityDto){
+        Product product=productService.findById(cartDetailQuantityDto.getIdProduct()).get();
         CartDetail cartDetail= cartDetailService.findById(cartDetailQuantityDto.getIdCartDetail()).get();
-        if(cartDetailService.existsByProduct_Id(cartDetailQuantityDto.getIdCartDetail())){
-            CartDetail withdrawQuantity = cartDetailService.getCartDetailByProduct_Id(cartDetailQuantityDto.getIdCartDetail());
-            Integer quantityNew = cartDetail.getQuantity() - 1;
-            BigDecimal total = cartDetail.getAmount().subtract(product.getPrevPrice());
-            cartDetail.setAmount(total);
-            cartDetail.setQuantity(quantityNew);
+        if(cartDetail.getQuantity() > 1){
+                CartDetail withdrawQuantity = cartDetailService.getCartDetailByProduct_Id(cartDetailQuantityDto.getIdProduct());
+                Integer quantityNew = cartDetail.getQuantity() - 1;
+                BigDecimal total = cartDetail.getAmount().subtract(product.getPrevPrice());
+                withdrawQuantity.setAmount(total);
+                withdrawQuantity.setQuantity(quantityNew);
+                cartDetailService.save(cartDetail);
+        }else{
+            cartDetailService.deleteById(cartDetailQuantityDto.getIdCartDetail());
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/add")
+    public ResponseEntity<?> addCart(@RequestBody CartDetailQuantityDto cartDetailQuantityDto){
+        Product product=productService.findById(cartDetailQuantityDto.getIdProduct()).get();
+        CartDetail cartDetail= cartDetailService.findById(cartDetailQuantityDto.getIdCartDetail()).get();
+
+            CartDetail withdrawQuantity = cartDetailService.getCartDetailByProduct_Id(cartDetailQuantityDto.getIdProduct());
+            Integer quantityNew = cartDetail.getQuantity() + 1;
+            BigDecimal total = cartDetail.getAmount().add(product.getPrevPrice());
+            withdrawQuantity.setAmount(total);
+            withdrawQuantity.setQuantity(quantityNew);
             cartDetailService.save(cartDetail);
 
-        }
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCart(@RequestBody CartDetailQuantityDto cartDetailQuantityDto){
+
+        cartDetailService.deleteById(cartDetailQuantityDto.getIdCartDetail());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

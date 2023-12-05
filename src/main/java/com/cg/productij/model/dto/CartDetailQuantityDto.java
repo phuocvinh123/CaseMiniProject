@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartDetailQuantityDto {
+    private Long idProduct;
     private Long idCartDetail;
-    private Integer quantity;
 }
