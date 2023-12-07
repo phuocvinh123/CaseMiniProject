@@ -48,4 +48,9 @@ public class CartDetailService implements ICartDetailService{
     public List<CartDetail> findAllByCart_Id(Long idCart) {
         return cartDetailRepository.findAllByCart_Id(idCart);
     }
+
+    @Override
+    public List<CartDetail> deleteAllByCart_Id(Long idCart) {
+        return cartDetailRepository.deleteAllByCart_Id(idCart);
+    }
 }

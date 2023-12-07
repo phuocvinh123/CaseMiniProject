@@ -32,7 +32,7 @@ public class CartDetailResController {
     }
 
 
-    @GetMapping("/cartdt")
+    @GetMapping("/cartDt")
     public ResponseEntity<?> getAllCartDetail(){
         List<CartDetail> cartDetails = cartDetailService.findAllByCart_Id(1L);
         return new ResponseEntity<>(cartDetails, HttpStatus.OK);
@@ -51,8 +51,11 @@ public class CartDetailResController {
         }else{
         CartDetail cartDetail = new CartDetail();
         cartDetail.setCart(cartService.findById(1L).get())
-                .setQuantity(1).setProduct(product).setAmount(product.getPrevPrice());
+                .setQuantity(1)
+                .setProduct(product)
+                .setAmount(product.getPrevPrice());
             cartDetailService.save(cartDetail);
+
     }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

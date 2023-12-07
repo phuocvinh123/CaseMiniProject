@@ -1,6 +1,7 @@
 package com.cg.productij.service.cart;
 
 import com.cg.productij.model.Cart;
+import com.cg.productij.model.CartDetail;
 import com.cg.productij.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,11 @@ public class CartService implements ICategoryService {
     @Override
     public void deleteById(Long id) {
         cartRepository.deleteById(id);
+    }
+
+
+    @Override
+    public List<CartDetail> getAllCartDetail(Cart cart) {
+        return cartRepository.getAllCartDetail(cart);
     }
 }

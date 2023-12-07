@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Setter
 @Getter
@@ -23,6 +24,4 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id",nullable = false)
     private CustomerInfo customerInfo;
-    private BigDecimal totalAmount = BigDecimal.ZERO;
-
 }

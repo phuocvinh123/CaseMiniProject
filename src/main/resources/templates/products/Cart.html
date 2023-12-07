@@ -21,25 +21,28 @@
             crossorigin="anonymous"
     ></script>
     <style>
-        .cart-quantity-wrap{
+        .cart-quantity-wrap {
             align-items: center;
             display: flex;
             justify-content: center;
         }
-    .cart-quantity {
-    align-items: center;
-    background-color: #0006;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 10px;
-    width: 100px;
-    }
-        .cart-quantity span:first-child,span:last-child{
+
+        .cart-quantity {
+            align-items: center;
+            background-color: #0006;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 10px;
+            width: 100px;
+        }
+
+        .cart-quantity span:first-child, span:last-child {
 
             cursor: pointer;
         }
-        td{
+
+        td {
             vertical-align: middle;
         }
     </style>
@@ -89,71 +92,79 @@
                 <div class="row col-md-12"><a href="/product">
                     Countinue shopping</a></div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4" style="min-width: 300px;">
-                <form>
-                    <div class="order-summary p-3"><h3 class="border-bottom py-2">Order Summary</h3>
-                        <div class="d-flex flex-column">
-                            <div class="d-flex align-items-center justify-content-between py-2">
-                                <span>Subtotal</span><span class="fw-bolder Subtotal" ></span></div>
-                            <div class="d-flex align-items-center justify-content-between py-2">
-                                <span>Shipping</span><span class="fw-bolder">Free</span></div>
+                <div class="col-sm-12 col-md-12 col-lg-4" style="min-width: 300px;">
+                    <form  >
+                        <div class="order-summary p-3"><h3 class="border-bottom py-2">Order Summary</h3>
+                            <input type="hidden" name="cartId" id="cartId" value="1">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center justify-content-between py-2">
+                                    <span>Subtotal</span>
+                                    <span class="fw-bolder Subtotal" id="Subtotal"> </span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between py-2">
+                                    <span>Shipping</span>
+                                    <span class="fw-bolder">Free</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between border-top mt-2 py-2">
+                                <span class="fs-6">Total</span>
+                                <span class="fw-bolder fs-6 Total" id="Total"> </span>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between border-top mt-2 py-2"><span
-                                class="fs-6">Total</span><span class="fw-bolder fs-6 Total"> </span></div>
-                    </div>
-                    <div class="customer-info p-3"><h3 class="border-bottom py-2">Customer Info</h3>
-                        <div class="form-group mb-3"><label class="form-label">Fullname</label><input type="text"
-                                                                                                      class="form-control "
-                                                                                                      placeholder="Fullname"
-                                                                                                      name="fullname"><span
-                                class="invalid-feedback"></span></div>
-                        <div class="form-group mb-3"><label class="form-label">Address</label><input type="text"
-                                                                                                     class="form-control "
-                                                                                                     placeholder="Address"
-                                                                                                     name="address"><span
-                                class="invalid-feedback"></span></div>
-                        <div class="form-group mb-3"><label class="form-label">Email</label><input type="text"
-                                                                                                   class="form-control "
-                                                                                                   placeholder="Email"
-                                                                                                   name="email"><span
-                                class="invalid-feedback"></span></div>
-                        <div class="form-group mb-3"><label class="form-label">Mobile</label><input type="text"
-                                                                                                    class="form-control "
-                                                                                                    placeholder="Mobile"
-                                                                                                    name="mobile"><span
-                                class="invalid-feedback"></span></div>
-                    </div>
-                    <div class="py-3 bg-success mt-2 d-flex align-items-center justify-content-center text-white btn-checkout">
-                        <button class="btn btn-block" type="submit">CHECKOUT</button>
-                    </div>
-                </form>
+                        <div class="customer-info p-3"><h3 class="border-bottom py-2">Customer Info</h3>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Fullname</label>
+                                <input type="text" class="form-control " placeholder="Fullname" name="fullname">
+                                <span class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-control " placeholder="Address" name="address">
+                                <span class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="text" class="form-control " placeholder="Email" name="email">
+                                <span class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Mobile</label>
+                                <input type="text" class="form-control " placeholder="Mobile" name="mobile">
+                                <span class="invalid-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="py-3 bg-success mt-2 d-flex align-items-center justify-content-center text-white btn-checkout">
+                            <button class="btn btn-block" type="button" id="checkout">CHECKOUT</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    const bodyCart = document.querySelector("#tbCart tbody");
+    <script>
+        const bodyCart = document.querySelector("#tbCart tbody");
+        const checkout= document.getElementById("checkout");
 
-    const api = "http://localhost:8080/api/cart";
+        const api = "http://localhost:8080/api/cart";
 
-    async function fetchAllCart() {
-        const response = await fetch(api);
-        // console.log(products);
-        return await response.json();
-    }
+        async function fetchAllCart() {
+            const response = await fetch(api);
+            // console.log(products);
+            return await response.json();
+        }
 
-    const getAllCart = async () => {
-        const Cart = await fetchAllCart();
-        bodyCart.innerHTML = '';
-        Cart.forEach((item) => {
-            const str = renderCart(item);
-            bodyCart.innerHTML += str;
-        });
-        calculateTotal()
-    };
+        const getAllCart = async () => {
+            const Cart = await fetchAllCart();
+            bodyCart.innerHTML = '';
+            Cart.forEach((item) => {
+                const str = renderCart(item);
+                bodyCart.innerHTML += str;
+            });
+            calculateTotal()
+        };
 
-    function renderCart(cart) {
-        return `
+        function renderCart(cart) {
+            return `
                 <tr id="tr_${cart.id}">
 
                     <td style="max-width: 200px;">
@@ -183,108 +194,141 @@
                 </td>
                 </tr>
             `
-    }
-    function calculateTotal() {
-        const totalItems = document.querySelectorAll(".total");
-
-        let subtotal = 0;
-        let total = 0;
-
-        totalItems.forEach((item) => {
-            const totalValue = parseFloat(item.innerText.replace("$", ""));
-            subtotal += totalValue;
-        });
-
-        total = subtotal;
-
-        const subtotalElement = document.querySelector(".Subtotal");
-        const totalElement = document.querySelector(".Total");
-
-        subtotalElement.innerText = "$" + subtotal.toFixed(2);
-        totalElement.innerText = "$" + total.toFixed(2);
-    }
-
-    function reduceQuantity(idProduct,idCartDetail){
-        const obj={
-            idProduct,
-            idCartDetail
         }
-        fetch("http://localhost:8080/api/cart/reduce", {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        })
-            .then(function (response) {
-                if (response.ok) {
-                    alert("reduce Cart Success.")
-                    getAllCart();
-                } else {
 
-                    alert("Failed to add product to cart.");
-                }
-            })
-            .catch(function (error) {
+        function calculateTotal() {
+            const totalItems = document.querySelectorAll(".total");
 
-                console.error("API call error:", error);
+            let subtotal = 0;
+            let total = 0;
+
+            totalItems.forEach((item) => {
+                const totalValue = parseFloat(item.innerText.replace("$", ""));
+                subtotal += totalValue;
             });
-    }
-    function addQuantity(idProduct,idCartDetail){
-        const obj={
-            idProduct,
-            idCartDetail
+
+            total = subtotal;
+
+            const subtotalElement = document.querySelector(".Subtotal");
+            const totalElement = document.querySelector(".Total");
+
+            subtotalElement.innerText = "$" + subtotal.toFixed(2);
+            totalElement.innerText = "$" + total.toFixed(2);
         }
-        fetch("http://localhost:8080/api/cart/add", {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        })
-            .then(function (response) {
-                if (response.ok) {
-                    alert("add Cart Success.")
-                    getAllCart();
 
-                } else {
-
-                    alert("Failed to add product to cart.");
-                }
-            })
-            .catch(function (error) {
-
-                console.error("API call error:", error);
-            });
-    }
-
-    function deleteCart(idProduct,idCartDetail) {
-        const obj={
-            idProduct,
-            idCartDetail
-        }
-        fetch("http://localhost:8080/api/cart/delete", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        })
-            .then(function (response) {
-            if (response.ok) {
-                alert("delete Cart Success.")
-                getAllCart();
-
-            } else {
-                alert("Failed to add product to cart.");
+        function reduceQuantity(idProduct, idCartDetail) {
+            const obj = {
+                idProduct,
+                idCartDetail
             }
-        })
-            .catch(function (error) {
-                console.error("API call error:", error);
-            });
-    }
+            fetch("http://localhost:8080/api/cart/reduce", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        alert("reduce Cart Success.")
+                        getAllCart();
+                    } else {
 
-    getAllCart()
-</script>
+                        alert("Failed to add product to cart.");
+                    }
+                })
+                .catch(function (error) {
+
+                    console.error("API call error:", error);
+                });
+        }
+
+        function addQuantity(idProduct, idCartDetail) {
+            const obj = {
+                idProduct,
+                idCartDetail
+            }
+            fetch("http://localhost:8080/api/cart/add", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        alert("add Cart Success.")
+                        getAllCart();
+
+                    } else {
+
+                        alert("Failed to add product to cart.");
+                    }
+                })
+                .catch(function (error) {
+
+                    console.error("API call error:", error);
+                });
+        }
+
+        function deleteCart(idProduct, idCartDetail) {
+            const obj = {
+                idProduct,
+                idCartDetail
+            }
+            fetch("http://localhost:8080/api/cart/delete", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        alert("delete Cart Success.")
+                        getAllCart();
+
+                    } else {
+                        alert("Failed to add product to cart.");
+                    }
+                })
+                .catch(function (error) {
+                    console.error("API call error:", error);
+                });
+        }
+
+        checkout.addEventListener("click",()=>{
+            const idCart=document.getElementById("cartId").value;
+            const cleanedTotal= document.getElementById("Total").innerText;
+            const Total = cleanedTotal.substring(1);
+            const obj={
+                subTotal:Total,
+                totalAmount:Total,
+                idCart:idCart
+            }
+            fetch("http://localhost:8080/api/order/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        alert("Order Success")
+                        getAllCart();
+
+                    } else {
+                        alert("Failed to add product to cart.");
+                    }
+                })
+                .catch(function (error) {
+                    console.error("API call error:", error);
+                });
+
+        })
+
+        getAllCart()
+    </script>
 </body>
 </html>

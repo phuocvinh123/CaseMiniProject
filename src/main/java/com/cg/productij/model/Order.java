@@ -28,4 +28,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id",nullable = false)
     private CustomerInfo customerInfo;
+    @ManyToOne
+    @JoinColumn(name = "cart_id", referencedColumnName = "id",nullable = false)
+    private Cart cart;
 }

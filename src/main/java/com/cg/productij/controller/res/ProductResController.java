@@ -1,8 +1,10 @@
 package com.cg.productij.controller.res;
 
-import com.cg.productij.model.CartDetail;
+
+import com.cg.productij.model.Category;
 import com.cg.productij.model.Product;
 import com.cg.productij.service.cartDetail.CartDetailService;
+import com.cg.productij.service.category.ICategoryService;
 import com.cg.productij.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +20,16 @@ import java.util.List;
 public class ProductResController {
     @Autowired
     private IProductService productService;
-    @Autowired
-    private CartDetailService cartDetailService;
+  @Autowired
+  private ICategoryService categoryService;
     @GetMapping("")
     public ResponseEntity<?> getAllProduct(){
         List<Product> products = productService.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-
+    @GetMapping("/category")
+    public ResponseEntity<?> getAllCategory(){
+        List<Category>categories=categoryService.findAll();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
 }
