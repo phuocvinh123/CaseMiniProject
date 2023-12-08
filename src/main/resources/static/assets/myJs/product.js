@@ -1,56 +1,102 @@
-const tbody = document.getElementById("bodyProduct");
-
-const search=document.getElementById("search");
-
-// const buttons = document.querySelectorAll('.btn');
-
-const option5=document.getElementById("option5");
-const option6=document.getElementById("option6");
-const option7=document.getElementById("option7");
-const option8=document.getElementById("option8");
-const option9=document.getElementById("option9");
-
-
-const allRadioButton = document.getElementById("cart_0");
-const sneakersRadioButton = document.getElementById("cart_1");
-const flatsRadioButton = document.getElementById("cart_2");
-const sandalsRadioButton = document.getElementById("cart_3");
-const hellsRadioButton = document.getElementById("cart_4");
-
-const price_0 = document.getElementById("price_0");
-const price_1 = document.getElementById("price_1");
-const price_2 = document.getElementById("price_2");
-const price_3 = document.getElementById("price_3");
-const price_4 = document.getElementById("price_4");
-const price_5 = document.getElementById("price_5");
-
-const color_0 = document.getElementById("color_0");
-const color_1 = document.getElementById("color_1");
-const color_2 = document.getElementById("color_2");
-const color_3 = document.getElementById("color_3");
-const color_4 = document.getElementById("color_4");
-const color_5 = document.getElementById("color_5");
-
-const api = "https://jsonserver-vercel-api.vercel.app/products";
-
-async function fetchAllProduct() {
-  const response = await fetch(api);
-  const products = await response.json();
-  // console.log(products);
-  return products;
+const page = {
+    url: {
+        getAllProduct: "http://localhost:8080/api/product",
+        getAllCategory:"http://localhost:8080/api/product/category",
+        getAllColor:"http://localhost:8080/api/product/color"
+    },
+    elements: {},
+    loadData: {},
+    commands: {}
 }
 
-const getAllProduct = async () => {
-  const products = await fetchAllProduct();
-  products.forEach((item) => {
-    const str = renderProduct(item);
-    tbody.innerHTML += str;
-  });
+$(async () => {
+    await page.loadData.getAllProduct()
+
+    $('input[name="category"], input[name="price"], input[name="color"] ,input[name="options-base"] ' ).on('change', function () {
+        pageCurrent = 0;
+        filterProducts();
+    });
+
+    $(`input[type="search"]`).on('input', filterProducts);
+
+})
+
+
+const tbody = $("#bodyProduct");
+const categoryBody = $("#categoryBody");
+const tbColor = $("#tbColor");
+
+let pageCurrent= 0;
+// const buttons = document.querySelectorAll('.btn');
+
+ function fetchAllCategory() {
+    return $.ajax({
+        url: page.url.getAllCategory,
+        method: 'GET',
+        dataType: 'json'
+    });
+}
+
+function fetchAllColor() {
+    return $.ajax({
+        url: page.url.getAllColor,
+        method: 'GET',
+        dataType: 'json'
+    });
+}
+
+async function fetchAllCartDetail() {
+    const response = await fetch("http://localhost:8080/api/cart/cartDt");
+    return await response.json();
+}
+
+page.loadData.getAllProduct = async () => {
+    await filterProducts();
+    const cart = await fetchAllCartDetail();
+    $('.quantity-cart-detail').text(cart.length)
+    // document.querySelector(".quantity-cart-detail").innerText = cart.length;
+
+    await getAllColor()
+    await getAllCategory()
 };
 
+const getAllCategory = async () => {
+    const categories = await fetchAllCategory();
+    categories.forEach((item) => {
+        const str = renderCategory(item);
+        categoryBody.append(str);
+    });
+}
+
+const getAllColor = async () => {
+    const colors = await fetchAllColor();
+    colors.forEach((item) => {
+        const str = renderColor(item);
+        tbColor.append(str);
+    });
+
+}
+
+function renderColor(color) {
+    return `
+    <div class="form-check py-1">
+        <input class="form-check-input" type="radio" name="color" id="color_${color.id}" value="${color.nameColor}"
+            style="background-color: ${color.nameColor}"/>
+        <label for="color_${color.id}" role="button" class="form-check-label">${color.nameColor}</label>
+    </div>`;
+}
+
+function renderCategory(category) {
+    return `
+    <div class="form-check py-1">
+        <input class="form-check-input" type="radio" name="category" id="category_${category.id}" value="${category.nameCategory}" />
+        <label for="category_${category.id}" class="form-check-label">${category.nameCategory}</label>
+    </div>`;
+}
+
 function renderProduct(product) {
-  const starRating = getStarRating(product.star);
-  return `
+    const starRating = getStarRating(product.star);
+    return `
       <div class="col-md-3 mb-4">
         <div class="card d-flex align-items-center pt-2" >
           <img src="${product.img}"  class="card-img-top" alt="${product.title}" width="20" height="100">
@@ -62,7 +108,7 @@ function renderProduct(product) {
             <del class="line-through me-2"> $${product.prevPrice}</del>
             <span>$${product.newPrice}</span>
             </div>
-            <a href="#" class="icon" ><i class="fa-solid fa-cart-arrow-down"></i></a>
+            <a href="#" class="icon"  id="cartIcon" onclick="addToCart(${product.id})"><i class="fa-solid fa-cart-arrow-down"></i></a>
             </div>
           </div>
         </div>
@@ -70,182 +116,123 @@ function renderProduct(product) {
     `;
 }
 
-function getStarRating(stars) {
-  const maxStars = 5;
-  const fullStar = "★";
-  // const halfStar = '☆';
-
-  const fullStarsCount = Math.floor(stars);
-  const hasHalfStar = stars % 1 !== 0;
-
-  let starRating = "";
-
-  for (let i = 0; i < fullStarsCount; i++) {
-    starRating += fullStar;
-  }
-
-  if (hasHalfStar) {
-    starRating += "";
-  }
-
-  for (let i = 0; i < maxStars - Math.ceil(stars); i++) {
-    starRating += "";
-  }
-
-  return starRating;
-}
-
-
-search.addEventListener("input",filterProducts);
-
-option5.addEventListener("change",filterProducts);
-option6.addEventListener("change",filterProducts);
-option7.addEventListener("change",filterProducts);
-option8.addEventListener("change",filterProducts);
-option9.addEventListener("change",filterProducts);
-
-allRadioButton.addEventListener("change",filterProducts);
-sneakersRadioButton.addEventListener("change", filterProducts);
-sandalsRadioButton.addEventListener("change",filterProducts);
-flatsRadioButton.addEventListener("change",filterProducts);
-hellsRadioButton.addEventListener("change",filterProducts);
-price_0.addEventListener("change", filterProducts);
-price_1.addEventListener("change", filterProducts);
-price_2.addEventListener("change", filterProducts);
-price_3.addEventListener("change", filterProducts);
-price_4.addEventListener("change", filterProducts);
-color_0.addEventListener("change", filterProducts);
-color_1.addEventListener("change", filterProducts);
-color_2.addEventListener("change", filterProducts);
-color_3.addEventListener("change", filterProducts);
-color_4.addEventListener("change", filterProducts);
-color_5.addEventListener("change", filterProducts);
-
-
-async function filterProducts() {
-  const category = getCategoryOption();
-  const price = getPriceOption();
-  const color = getColorOption();
-  const searchTerm = searchProduct();
-  const buttonOption=buttonProduct();
-
-  const products = await fetchAllProduct();
-  let filteredData = products;
-  
-  if (buttonOption) {
-    filteredData = filteredData.filter((item) => item.company === buttonOption);
-  }
- 
-  
-  if (category) {
-    filteredData = filteredData.filter((item) => item.category === category);
-  }
-
-  if (price) {
-    if (Array.isArray(price)) {
-      filteredData = filteredData.filter((item) => item.newPrice >= price[0] && item.newPrice < price[1]);
-    } else {
-      filteredData = filteredData.filter((item) => item.newPrice >= price);
+function addToCart(idProduct) {
+    const obj = {
+        idProduct
     }
-  }
+    fetch("http://localhost:8080/api/cart/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj)
+    })
+        .then(function (response) {
+            if (response.ok) {
 
-  if (color) {
-    filteredData = filteredData.filter((item) => item.color === color);
-  }
+                alert("Product added to cart.")
+                getAllProduct();
+                // console.log("Product added to cart.");
+            } else {
 
-  if (searchTerm) {
-    filteredData = filteredData.filter((item) => item.title.toLowerCase().includes(searchTerm));
-  }
-
-  tbody.innerHTML = '';
-  filteredData.forEach((item) => {
-    const str = renderProduct(item);
-    tbody.innerHTML += str;
-  });
+                alert("Failed to add product to cart.");
+            }
+        })
+        .catch(function (error) {
+            // Xử lý lỗi trong trường hợp có lỗi xảy ra trong quá trình gọi API
+            console.error("API call error:", error);
+        });
 }
 
-function getCategoryOption(){
-  if(allRadioButton.checked){
-    return null;
-  }else if(sneakersRadioButton.checked){
-    return "sneakers";
-  }else if(sandalsRadioButton.checked){
-    return "sandals"
-  }else if(flatsRadioButton.checked){
-    return "flats"
-  }else if(hellsRadioButton.checked){
-    return "heels"
-  }
+function getStarRating(stars) {
+    const maxStars = 5;
+    const fullStar = "★";
+    // const halfStar = '☆';
+
+    const fullStarsCount = Math.floor(stars);
+    const hasHalfStar = stars % 1 !== 0;
+    let starRating = "";
+    for (let i = 0; i < fullStarsCount; i++) {
+        starRating += fullStar;
+    }
+    if (hasHalfStar) {
+        starRating += "";
+    }
+    for (let i = 0; i < maxStars - Math.ceil(stars); i++) {
+        starRating += "";
+    }
+    return starRating;
 }
 
-function getColorOption() {
-  if (color_0.checked) {
-    return null;
-  } else if (color_1.checked) {
-    return "black";
-  }else if (color_2.checked) {
-    return "blue";
-  }else if (color_3.checked) {
-    return "red";
-  }else if (color_4.checked) {
-    return "green";
-  }else if (color_5.checked) {
-    return "white";
-  }
-  
+
+function filterProducts() {
+    const searchInput = $('input[type="search"]').val();
+    const category = $('input[name="category"]:checked').val().toLowerCase();
+    const color = $('input[name="color"]:checked').val().toLowerCase();
+    const options = $('input[name="options-base"]:checked').val().toLowerCase();
+    const priceInput = $('input[name="price"]:checked').val();
+    const priceValues = priceInput.split(',');
+    const maxPrice = priceValues[1];
+    const minPrice = priceValues[0];
+
+
+    $.ajax({
+        url: "http://localhost:8080/api/filter",
+        contentType: 'application/json',
+        method: 'GET',
+        data: {
+            search: searchInput,
+            category: category,
+            company: options,
+            color: color,
+            maxPrice: maxPrice,
+            minPrice: minPrice,
+            page: pageCurrent,
+            size: 8
+        },
+    }).done(function (filteredProducts) {
+        tbody.empty();
+
+        filteredProducts.content.forEach(item => {
+            const str = renderProduct(item);
+            tbody.append(str);
+        });
+
+        renderPagination(filteredProducts.totalPages, pageCurrent)
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("lỗi")
+    });
 }
 
-function getPriceOption() {
-  if (price_0.checked) {
-    return null; 
-  } else if (price_1.checked) {
-    return [0, 50]; 
-  } else if (price_2.checked) {
-    return [50, 100]; 
-  }else if (price_3.checked) {
-    return [100, 150]; 
-  }else if (price_4.checked) {
-    return [150, 500]; 
-  }
-}
-function searchProduct(){
-  const searchTerm = search.value.trim().toLowerCase(); 
-  return searchTerm;
+function renderPagination( totalPages){
+    const page=$("#page");
+    page.empty()
+ for (let i= 0 ;i<totalPages;i++){
+     const  strRenderPage=`<li class="page-item btn-get-page"><a class="page-link ${i === pageCurrent ? 'active' : ''}">${i+1}</a></li>`
+     page.append(strRenderPage)
+ }
+
+    $('.btn-get-page').on("click", function (){
+        pageCurrent = parseInt(this.querySelector('.page-link').innerText) - 1
+        console.log(pageCurrent)
+        filterProducts()
+    })
+
 }
 
-function buttonProduct(){
-  if(option5.checked){
-    return null;
-  }
-  if(option6.checked){
-    return "Nike";
-  }if(option7.checked){
-    return "Adidas";
-  }if(option8.checked){
-    return "Puma";
-  }if(option9.checked){
-    return "Vans";
-  }
-}
 
-// let selectedCompany = '';
 
-// buttons.forEach((button) => {
-//   button.addEventListener('click', () => {
-//     buttons.forEach((btn) => {
-//       btn.classList.remove('active');
-//     });
-//     button.classList.add('active');
-//     selectedCompany = button.textContent.trim();
 
-    
-   
-//     filterProductsByCompany(selectedCompany);
-//   });
-// });
 
-// function filterProductsByCompany(selectedCompany) {
-//   filterProducts(selectedCompany);
-// }
 
-getAllProduct();
+
+
+
+
+
+
+
+
+
+

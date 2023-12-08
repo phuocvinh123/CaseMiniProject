@@ -4,48 +4,18 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous"/>
 
-
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-    ></script>
-    <script
-            src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!--    <link rel="stylesheet" href="/static/assets/myJs/product.css">-->
-    <style>
-        .star-rating {
-            color: gold;
-        }
-
-        .icon {
-            color: black;
-        }
-
-        .btn-check:checked + .btn {
-            background-color: rgb(128, 128, 128);
-            border: 1px solid black;
-        }
-
-        .btn {
-            border: 2px solid rgb(128, 128, 128);
-            padding: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/assets/myJs/product.css">
 </head>
 <body>
 <div id="root">
@@ -59,13 +29,8 @@
         <div class="d-flex flex-grow-1 justify-content-between">
             <div>
                 <form class="w-50 d-flex align-items-center">
-                    <input
-                            type="search"
-                            placeholder="Enter your search shoe"
-                            id="search"
-                            value
-                            style="padding-right: 600px"
-                    />
+                    <input type="search" placeholder="Enter your search shoe" name="search" id="search" value
+                           style="padding-right: 600px"/>
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
             </div>
@@ -93,26 +58,11 @@
                     <h5>Category</h5>
                     <div class="form-group" id="categoryBody">
                         <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="category" id="cart_0" value="All"
+                            <input class="form-check-input" type="radio" name="category" id="cart_0" value="all"
                                    checked/>
                             <label role="button" class="form-check-label">All</label>
                         </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="category" id="cart_1" value="Sneakers"/>
-                            <label role="button" class="form-check-label">Sneakers</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="category" id="cart_2" value="Flats"/>
-                            <label role="button" class="form-check-label">Flats</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="category" id="cart_3" value="Sandals"/>
-                            <label role="button" class="form-check-label">Sandals</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="category" id="cart_4" value="Heels"/>
-                            <label role="button" class="form-check-label">Heels</label>
-                        </div>
+
                     </div>
                 </div>
 
@@ -120,7 +70,7 @@
                     <h5>Price</h5>
                     <div class="form-group">
                         <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="price" id="price_0" value="0,0" checked/>
+                            <input class="form-check-input" type="radio" name="price" id="price_0" value="0,5000" checked/>
                             <label for="price_0" role="button" class="form-check-label">All</label>
                         </div>
                         <div class="form-check py-1">
@@ -136,7 +86,7 @@
                             <label for="price_3" role="button" class="form-check-label">$100-$150</label>
                         </div>
                         <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="price" id="price_4" value="150,150"/>
+                            <input class="form-check-input" type="radio" name="price" id="price_4" value="150,5000"/>
                             <label for="price_4" role="button" class="form-check-label">Over $150</label>
                         </div>
                     </div>
@@ -144,34 +94,15 @@
 
                 <div class="py-2 d-flex flex-column justify-content-center">
                     <h5>Colors</h5>
-                    <div class="form-group">
+                    <div class="form-group" id="tbColor">
                         <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_0" value="All" checked style="
+                            <input class="form-check-input" type="radio" name="color" id="color_0" value="all" checked
+                                   style="
                       background-image: linear-gradient(to right, red, green);
                     "/>
                             <label for="color_0" role="button" class="form-check-label">All</label>
                         </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_1" value="Black" style="background-color: black"/>
-                            <label for="color_1" role="button" class="form-check-label">Black</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_2" value="Blue" style="background-color: blue"/>
-                            <label for="color_2" role="button" class="form-check-label">Blue</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_3" value="Red" style="background-color: red"/>
-                            <label for="color_3" role="button" class="form-check-label">Red</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_4" value="Green" style="background-color: green"/>
-                            <label for="color_4" role="button" class="form-check-label">Green</label>
-                        </div>
-                        <div class="form-check py-1">
-                            <input class="form-check-input" type="radio" name="color" id="color_5" value="White"
-                                   style="background-color: white"/>
-                            <label for="color_5" role="button" class="form-check-label">White</label>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -213,19 +144,24 @@
                     </button>
                   </div> -->
 
-                    <input type="radio" class="btn-check " name="options-base" id="option5" autocomplete="off" checked>
+                    <input type="radio" class="btn-check " name="options-base" id="option5" autocomplete="off"
+                           value="all" checked>
                     <label class="btn" for="option5">All Products </label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off">
+                    <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off"
+                           value="Nike">
                     <label class="btn" for="option6">Nike</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option7" autocomplete="off">
+                    <input type="radio" class="btn-check" name="options-base" id="option7" autocomplete="off"
+                           value="Adidas">
                     <label class="btn" for="option7">Adidas</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option8" autocomplete="off">
+                    <input type="radio" class="btn-check" name="options-base" id="option8" autocomplete="off"
+                           value="Puma">
                     <label class="btn" for="option8">Puma</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option9" autocomplete="off">
+                    <input type="radio" class="btn-check" name="options-base" id="option9" autocomplete="off"
+                           value="Vans">
                     <label class="btn" for="option9">Vans</label>
 
                 </div>
@@ -238,311 +174,18 @@
 
                     </div>
                 </div>
+
+                <div class="mt-5 d-flex justify-content-center">
+                    <nav aria-label="Page navigation example" style="border-bottom: none">
+                        <ul class="pagination" id="page">
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-<!--    <script src="/static/assets/myJs/product.js"></script>-->
-<script>
-    const tbody = document.getElementById("bodyProduct");
-    const categoryBody = document.getElementById("categoryBody");
-
-
-    const search = document.getElementById("search");
-
-    // const buttons = document.querySelectorAll('.btn');
-
-    const option5 = document.getElementById("option5");
-    const option6 = document.getElementById("option6");
-    const option7 = document.getElementById("option7");
-    const option8 = document.getElementById("option8");
-    const option9 = document.getElementById("option9");
-
-
-    const allRadioButton = document.getElementById("cart_0");
-    const sneakersRadioButton = document.getElementById("cart_1");
-    const flatsRadioButton = document.getElementById("cart_2");
-    const sandalsRadioButton = document.getElementById("cart_3");
-    const hellsRadioButton = document.getElementById("cart_4");
-
-    const price_0 = document.getElementById("price_0");
-    const price_1 = document.getElementById("price_1");
-    const price_2 = document.getElementById("price_2");
-    const price_3 = document.getElementById("price_3");
-    const price_4 = document.getElementById("price_4");
-
-
-    const color_0 = document.getElementById("color_0");
-    const color_1 = document.getElementById("color_1");
-    const color_2 = document.getElementById("color_2");
-    const color_3 = document.getElementById("color_3");
-    const color_4 = document.getElementById("color_4");
-    const color_5 = document.getElementById("color_5");
-
-    const api = "http://localhost:8080/api/product";
-
-    async function fetchAllProduct() {
-        const response = await fetch(api);
-
-        return await response.json();
-    }
-
-    async function fetchAllCategory() {
-        const response = await fetch("http://localhost:8080/api/product/category");
-        return await response.json();
-    }
-
-    async function fetchAllCartDetail() {
-        const response = await fetch("http://localhost:8080/api/cart/cartDt");
-        return await response.json();
-    }
-
-    const getAllProduct = async () => {
-        const products = await fetchAllProduct();
-        products.forEach((item) => {
-            const str = renderProduct(item);
-            tbody.innerHTML += str;
-        });
-        const cart = await fetchAllCartDetail();
-        // $('.quantity-cart-detail').text(cart.length)
-        document.querySelector(".quantity-cart-detail").innerText = cart.length;
-
-        // await getAllCategory()
-    };
-
-    // const getAllCategory = async ()=>{
-    //     const categories=await fetchAllCategory();
-    //     categories.forEach((item)=>{
-    //         const str= renderCategory(item);
-    //         categoryBody.innerHTML += str;
-    //     });
-    // }
-
-    // function renderCategory(category){
-    //     return`          <div class="form-check py-1">
-    //                         <input class="form-check-input" type="radio" name="category" id="cart_${category.id}" value="${category.nameCategory}"/>
-    //                         <label role="button" class="form-check-label">${category.nameCategory}</label>
-    //                     </div>`;
-    // }
-
-    function renderProduct(product) {
-        const starRating = getStarRating(product.star);
-        return `
-      <div class="col-md-3 mb-4">
-        <div class="card d-flex align-items-center pt-2" >
-          <img src="${product.img}"  class="card-img-top" alt="${product.title}" width="20" height="100">
-          <div class="card-body">
-            <h5 class="card-title">${product.title}</h5>
-            <p class="card-star"><span class="star-rating">${starRating}</span> (${product.reviews} reviews)</p>
-            <div class="d-flex align-items-center justify-content-between">
-            <div>
-            <del class="line-through me-2"> $${product.prevPrice}</del>
-            <span>$${product.newPrice}</span>
-            </div>
-            <a href="#" class="icon"  id="cartIcon" onclick="addToCart(${product.id})"><i class="fa-solid fa-cart-arrow-down"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-    }
-
-    function addToCart(idProduct) {
-        const obj = {
-            idProduct
-        }
-        fetch("http://localhost:8080/api/cart/create", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        })
-            .then(function (response) {
-                if (response.ok) {
-
-                    alert("Product added to cart.")
-                    getAllProduct();
-                    // console.log("Product added to cart.");
-                } else {
-
-                    alert("Failed to add product to cart.");
-                }
-            })
-            .catch(function (error) {
-                // Xử lý lỗi trong trường hợp có lỗi xảy ra trong quá trình gọi API
-                console.error("API call error:", error);
-            });
-    }
-
-    function getStarRating(stars) {
-        const maxStars = 5;
-        const fullStar = "★";
-        // const halfStar = '☆';
-
-        const fullStarsCount = Math.floor(stars);
-        const hasHalfStar = stars % 1 !== 0;
-
-        let starRating = "";
-
-        for (let i = 0; i < fullStarsCount; i++) {
-            starRating += fullStar;
-        }
-
-        if (hasHalfStar) {
-            starRating += "";
-        }
-
-        for (let i = 0; i < maxStars - Math.ceil(stars); i++) {
-            starRating += "";
-        }
-
-        return starRating;
-    }
-
-
-    search.addEventListener("input", filterProducts);
-
-    option5.addEventListener("change", filterProducts);
-    option6.addEventListener("change", filterProducts);
-    option7.addEventListener("change", filterProducts);
-    option8.addEventListener("change", filterProducts);
-    option9.addEventListener("change", filterProducts);
-
-    allRadioButton.addEventListener("change", filterProducts);
-    sneakersRadioButton.addEventListener("change", filterProducts);
-    sandalsRadioButton.addEventListener("change", filterProducts);
-    flatsRadioButton.addEventListener("change", filterProducts);
-    hellsRadioButton.addEventListener("change", filterProducts);
-
-    price_0.addEventListener("change", filterProducts);
-    price_1.addEventListener("change", filterProducts);
-    price_2.addEventListener("change", filterProducts);
-    price_3.addEventListener("change", filterProducts);
-    price_4.addEventListener("change", filterProducts);
-    color_0.addEventListener("change", filterProducts);
-    color_1.addEventListener("change", filterProducts);
-    color_2.addEventListener("change", filterProducts);
-    color_3.addEventListener("change", filterProducts);
-    color_4.addEventListener("change", filterProducts);
-    color_5.addEventListener("change", filterProducts);
-
-
-    async function filterProducts() {
-        const category = getCategoryOption();
-        const price = getPriceOption();
-        const color = getColorOption();
-        const searchTerm = searchProduct();
-        const buttonOption = buttonProduct();
-        const products = await fetchAllProduct();
-        let filteredData = products;
-        if (buttonOption) {
-            filteredData = filteredData.filter((item) => item.company.nameCompany === buttonOption);
-        }
-        if (category) {
-            filteredData = filteredData.filter((item) => item.category.nameCategory === category);
-        }
-        if (price) {
-            if (Array.isArray(price)) {
-                filteredData = filteredData.filter((item) => item.newPrice >= price[0] && item.newPrice < price[1]);
-            } else {
-                filteredData = filteredData.filter((item) => item.newPrice >= price);
-            }
-        }
-        if (color) {
-            filteredData = filteredData.filter((item) => item.color.nameColor === color);
-        }
-        if (searchTerm) {
-            filteredData = filteredData.filter((item) => item.title.toLowerCase().includes(searchTerm));
-        }
-        tbody.innerHTML = '';
-        filteredData.forEach((item) => {
-            const str = renderProduct(item);
-            tbody.innerHTML += str;
-        });
-    }
-
-    function getCategoryOption() {
-        if (allRadioButton.checked) {
-            return null;
-        } else if (sneakersRadioButton.checked) {
-            return "Sneakers";
-        } else if (sandalsRadioButton.checked) {
-            return "Sandals"
-        } else if (flatsRadioButton.checked) {
-            return "Flats"
-        } else if (hellsRadioButton.checked) {
-            return "Heels"
-        }
-    }
-
-    function getColorOption() {
-        if (color_0.checked) {
-            return null;
-        } else if (color_1.checked) {
-            return "black";
-        } else if (color_2.checked) {
-            return "blue";
-        } else if (color_3.checked) {
-            return "red";
-        } else if (color_4.checked) {
-            return "green";
-        } else if (color_5.checked) {
-            return "white";
-        }
-
-    }
-
-    function getPriceOption() {
-        if (price_0.checked) {
-            return null;
-        } else if (price_1.checked) {
-            return [0, 50];
-        } else if (price_2.checked) {
-            return [50, 100];
-        } else if (price_3.checked) {
-            return [100, 150];
-        } else if (price_4.checked) {
-            return [150, 500];
-        }
-    }
-
-    function searchProduct() {
-        const searchTerm = search.value.trim().toLowerCase();
-        return searchTerm;
-    }
-
-    function buttonProduct() {
-        if (option5.checked) {
-            return null;
-        }
-        if (option6.checked) {
-            return "Nike";
-        }
-        if (option7.checked) {
-            return "Adidas";
-        }
-        if (option8.checked) {
-            return "Puma";
-        }
-        if (option9.checked) {
-            return "Vans";
-        }
-    }
-
-    // let selectedCompany = '';
-
-    // buttons.forEach((button) => {
-    //   button.addEventListener('click', () => {
-    //     buttons.forEach((btn) => {
-    //       btn.classList.remove('active');
-    //     });
-    //     button.classList.add('active');
-    //     selectedCompany = button.textContent.trim();
-
-
-     getAllProduct();
-
-</script>
+<script src="/static/assets/myJs/product.js"></script>
 </body>
 </html>

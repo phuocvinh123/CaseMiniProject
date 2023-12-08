@@ -1,14 +1,17 @@
-.star-rating{
+.star-rating {
     color: gold;
 }
-.icon{
-    color:black;
+
+.icon {
+    color: black;
 }
+
 .btn-check:checked + .btn {
     background-color: rgb(128, 128, 128);
     border: 1px solid black;
-  }
-  .btn {
+}
+
+.btn {
     border: 2px solid rgb(128, 128, 128);
     padding: 5px;
-  }
+}
