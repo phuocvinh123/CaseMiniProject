@@ -19,6 +19,11 @@ $(async () => {
 
     $(`input[type="search"]`).on('input', filterProducts);
 
+    $('.selectOption').on('change', function (){
+        pageCurrent = 0
+        filterProducts();
+    })
+
 })
 
 
@@ -165,6 +170,7 @@ function getStarRating(stars) {
 }
 
 
+
 function filterProducts() {
     const searchInput = $('input[type="search"]').val();
     const category = $('input[name="category"]:checked').val().toLowerCase();
@@ -174,7 +180,8 @@ function filterProducts() {
     const priceValues = priceInput.split(',');
     const maxPrice = priceValues[1];
     const minPrice = priceValues[0];
-
+    const strField = $('#selected-sortField').find(":selected").val()
+    const strSort = $('#selected-sortDirection').find(":selected").val()
 
     $.ajax({
         url: "http://localhost:8080/api/filter",
@@ -188,7 +195,9 @@ function filterProducts() {
             maxPrice: maxPrice,
             minPrice: minPrice,
             page: pageCurrent,
-            size: 8
+            size: 8,
+            sortField : strField,
+            direction : strSort
         },
     }).done(function (filteredProducts) {
         tbody.empty();
@@ -198,7 +207,7 @@ function filterProducts() {
             tbody.append(str);
         });
 
-        renderPagination(filteredProducts.totalPages, pageCurrent)
+        renderPagination(filteredProducts.totalPages)
 
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("lỗi")

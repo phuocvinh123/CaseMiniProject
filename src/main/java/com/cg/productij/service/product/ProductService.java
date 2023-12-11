@@ -41,9 +41,5 @@ public class ProductService implements IProductService {
         productRepository.deleteById(id);
     }
 
-    public Page<Product> filterProduct(String category, String company, Long maxPrices, Long minPrices, String color, String search, Pageable pageable) {
-        BigDecimal maxPrice = new BigDecimal(maxPrices);
-        BigDecimal minPrice = new BigDecimal(minPrices);
-        return productRepository.filterProduct(category, company, maxPrice, minPrice, color, search, pageable);
-    }
+
 }

@@ -18,5 +18,8 @@ public class productController {
         return "/products/Cart";
     }
 
-
+@GetMapping("/admin")
+public String showAdmin(){
+    return "/admin/productList";
+}
 }
