@@ -60,7 +60,6 @@ page.loadData.getAllProduct = async () => {
     const cart = await fetchAllCartDetail();
     $('.quantity-cart-detail').text(cart.length)
     // document.querySelector(".quantity-cart-detail").innerText = cart.length;
-
     await getAllColor()
     await getAllCategory()
 };
@@ -121,11 +120,11 @@ function renderProduct(product) {
     `;
 }
 
-function addToCart(idProduct) {
+async function addToCart(idProduct) {
     const obj = {
         idProduct
     }
-    fetch("http://localhost:8080/api/cart/create", {
+   await fetch("http://localhost:8080/api/cart/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -136,7 +135,7 @@ function addToCart(idProduct) {
             if (response.ok) {
 
                 alert("Product added to cart.")
-                getAllProduct();
+               page.loadData.getAllProduct();
                 // console.log("Product added to cart.");
             } else {
 
@@ -169,7 +168,23 @@ function getStarRating(stars) {
     return starRating;
 }
 
-
+// $('#selected-sortField').on('change',function (){
+//     const eleOpt = $('#selected-sortField:selected').val();
+//     if (eleOpt === 'title') {
+//         $('#selected-sortDirection').empty();
+//         const str = `
+//                         <option value="asc">A-Z</option>
+//                         <option value="desc">Z-A</option> `;
+//         $('#selected-sortDirection').append(str)
+//     }
+//     if (eleOpt === 'newPrice') {
+//         $('#selected-sortDirection').empty();
+//         const str = `
+//                          <option value="asc">Tăng theo giá</option>
+//                         <option value="desc">Giảm theo giá</option> `;
+//         $('#selected-sortDirection').append(str)
+//     }
+// })
 
 function filterProducts() {
     const searchInput = $('input[type="search"]').val();

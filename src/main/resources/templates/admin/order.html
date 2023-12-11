@@ -19,10 +19,10 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
             <div class="d-flex align-items-center" style="min-width: 180px;">
-                <a class="logo" href="/product">Dashboard</a>
+                <a class="logo" href="/product"> <i class="fa-solid fa-cart-plus"></i> Dashboard</a>
             </div>
             <div>
-                <a href="/shoe">Khoa Nguyễn</a>
+                <a href="/shoe"></a>
             </div>
         </div>
 
@@ -32,10 +32,12 @@
                     <h5>Menu</h5>
                     <div class="d-flex flex-column">
                         <a aria-current="page" class="menu d-flex align-items-center active"
-                           href="/dashboard/order-list">
-                        Order List</a>
-                        <a class="menu d-flex align-items-center" href="/admin/productList">
-                        Products</a></div>
+                           href="/admin/order">
+                           <span> <i class="fa-solid fa-cart-plus"></i> </span>
+                            Order List</a>
+                        <a class="menu d-flex align-items-center" href="/admin/product-list">
+                          <span>  <i class="fa-solid fa-sitemap"></i></span>
+                            Products</a></div>
                 </div>
             </div>
             <div class="flex-grow-1">
@@ -55,19 +57,20 @@
                                     <th class="text-end align-middle">Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-end align-middle">Nov 29 2023</td>
-                                    <td class="text-end align-middle">3</td>
-                                    <td class="text-end align-middle">$600</td>
-                                    <td class="text-end align-middle">Free</td>
-                                    <td class="text-end align-middle">$600</td>
-                                    <td class="text-end align-middle"><span class="badge bg-secondary">draft</span></td>
-                                    <td class="text-start align-middle">Khoa Nguyễn</td>
-                                    <td class="text-end align-middle">
+                                <tbody id="tbOrderList">
+<!--                                <tr>-->
+<!--                                    <td class="text-end align-middle">Nov 29 2023</td>-->
+<!--                                    <td class="text-end align-middle">3</td>-->
+<!--                                    <td class="text-end align-middle">$600</td>-->
+<!--                                    <td class="text-end align-middle">Free</td>-->
+<!--                                    <td class="text-end align-middle">$600</td>-->
+<!--                                    <td class="text-end align-middle"><span class="badge bg-secondary">draft</span></td>-->
+<!--                                    <td class="text-start align-middle">Khoa Nguyễn</td>-->
+<!--                                    <td class="text-end align-middle"><i class="fa-solid fa-ellipsis-vertical"></i>-->
 
-                                    </td>
-                                </tr>
+
+<!--                                    </td>-->
+<!--                                </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -78,7 +81,7 @@
     </div>
 
 </div>
-
+<script src="/static/assets/myJs/order.js"></script>
 
 </body>
 </html>
