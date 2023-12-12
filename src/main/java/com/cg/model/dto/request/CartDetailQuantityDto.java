@@ -1,14 +1,17 @@
-package com.cg.model.dto;
+package com.cg.model.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartDetailCreDto {
+public class CartDetailQuantityDto {
     private Long idProduct;
+    private Long idCartDetail;
 }

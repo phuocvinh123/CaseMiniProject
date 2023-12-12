@@ -1,6 +1,6 @@
 package com.cg.model;
 
-import com.cg.model.dto.CustomerInfoDTO;
+import com.cg.model.dto.request.CustomerInfoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

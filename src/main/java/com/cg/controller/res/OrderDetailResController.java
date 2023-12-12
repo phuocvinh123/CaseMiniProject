@@ -2,10 +2,11 @@ package com.cg.controller.res;
 
 import com.cg.model.Order;
 import com.cg.model.OrderDetail;
-import com.cg.model.dto.OrderDetailDTO;
+import com.cg.model.dto.reponse.OrderDTO;
 import com.cg.model.Cart;
 import com.cg.model.CartDetail;
-import com.cg.model.dto.OrderDetailCreDTO;
+import com.cg.model.dto.reponse.OrderDetailDTO;
+import com.cg.model.dto.request.OrderDetailCreDTO;
 import com.cg.service.cart.CartService;
 import com.cg.service.cartDetail.CartDetailService;
 import com.cg.service.order.OrderService;
@@ -31,7 +32,8 @@ public class OrderDetailResController {
 
     @GetMapping
     public ResponseEntity<?> showOrderList(){
-        List<OrderDetailDTO> orders =orderService.getAllOrderDetailDTO();
+        List<OrderDTO> orders =orderService.getAllOrderDetailDTO();
+
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 

@@ -1,9 +1,9 @@
 package com.cg.controller.res;
 
-import com.cg.model.dto.CartDetailCreDto;
+import com.cg.model.dto.request.CartDetailCreDto;
 import com.cg.model.CartDetail;
 import com.cg.model.Product;
-import com.cg.model.dto.CartDetailQuantityDto;
+import com.cg.model.dto.request.CartDetailQuantityDto;
 import com.cg.service.cart.CartService;
 import com.cg.service.cartDetail.CartDetailService;
 import com.cg.service.product.ProductService;

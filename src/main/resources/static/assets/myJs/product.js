@@ -8,6 +8,18 @@ const page = {
     loadData: {},
     commands: {}
 }
+const  allCategory = `<div class="form-check py-1">
+                            <input class="form-check-input" type="radio" name="category" id="cart_0" checked value="all"/>
+                            <label role="button" class="form-check-label">All</label>
+                        </div>`
+
+const allColor =`<div class="form-check py-1">
+                            <input class="form-check-input" type="radio" name="color" id="color_0" value="all" checked
+                                   style="
+                      background-image: linear-gradient(to right, red, green);
+                    "/>
+                            <label for="color_0" role="button" class="form-check-label">All</label>
+                        </div>`
 
 $(async () => {
     await page.loadData.getAllProduct()
@@ -56,16 +68,19 @@ async function fetchAllCartDetail() {
 }
 
 page.loadData.getAllProduct = async () => {
+    await getAllColor()
+    await getAllCategory()
     await filterProducts();
     const cart = await fetchAllCartDetail();
     $('.quantity-cart-detail').text(cart.length)
     // document.querySelector(".quantity-cart-detail").innerText = cart.length;
-    await getAllColor()
-    await getAllCategory()
+
 };
 
 const getAllCategory = async () => {
     const categories = await fetchAllCategory();
+    categoryBody.empty()
+    categoryBody.append(allCategory)
     categories.forEach((item) => {
         const str = renderCategory(item);
         categoryBody.append(str);
@@ -74,6 +89,8 @@ const getAllCategory = async () => {
 
 const getAllColor = async () => {
     const colors = await fetchAllColor();
+    tbColor.empty()
+    tbColor.append(allColor)
     colors.forEach((item) => {
         const str = renderColor(item);
         tbColor.append(str);
@@ -133,18 +150,15 @@ async function addToCart(idProduct) {
     })
         .then(function (response) {
             if (response.ok) {
-
-                alert("Product added to cart.")
+                toastr.success("Product added to cart.")
                page.loadData.getAllProduct();
-                // console.log("Product added to cart.");
-            } else {
 
-                alert("Failed to add product to cart.");
+            } else {
+                toastr.error("Failed to add product to cart.");
             }
         })
         .catch(function (error) {
-            // Xử lý lỗi trong trường hợp có lỗi xảy ra trong quá trình gọi API
-            console.error("API call error:", error);
+            toastr.error("API call error:", error);
         });
 }
 
@@ -221,7 +235,6 @@ function filterProducts() {
             const str = renderProduct(item);
             tbody.append(str);
         });
-
         renderPagination(filteredProducts.totalPages)
 
     }).fail(function (jqXHR, textStatus, errorThrown) {

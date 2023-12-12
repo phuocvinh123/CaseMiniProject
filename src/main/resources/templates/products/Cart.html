@@ -15,11 +15,17 @@
     />
 
 
+
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
     <style>
         .cart-quantity-wrap {
             align-items: center;
@@ -46,10 +52,16 @@
             vertical-align: middle;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
 </head>
 <body>
 <div id="root">
-    <div class="Toastify"></div>
+<!--    <div class="Toastify"></div>-->
     <div class="container d-flex align-items-center border-bottom py-2 mt-2">
         <div class="d-flex align-items-center" style="min-width: 180px;"><a class="logo" href="/product">
             <i class="fa-solid fa-cart-plus"></i>
@@ -64,7 +76,7 @@
                 <div>
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
-                <a href="#">
+                <a href="/admin/order">
                     <i class="fa-solid fa-user"></i>
                 </a></div>
         </div>
@@ -230,16 +242,14 @@
             })
                 .then(function (response) {
                     if (response.ok) {
-
+                        toastr.success('reduce Quantity success');
                         getAllCart();
                     } else {
-
-                        alert("Failed to add product to cart.");
+                        toastr.error("Failed to add product to cart.")
                     }
                 })
                 .catch(function (error) {
-
-                    console.error("API call error:", error);
+                        toastr.error("fail")
                 });
         }
 
@@ -257,44 +267,58 @@
             })
                 .then(function (response) {
                     if (response.ok) {
-
+                        toastr.success("Add to product success")
                         getAllCart();
-
                     } else {
-
-                        alert("Failed to add product to cart.");
+                        toastr.error("Failed to add product to cart.")
                     }
                 })
                 .catch(function (error) {
 
-                    console.error("API call error:", error);
+                    toastr.error("API call error:", error);
                 });
         }
 
         function deleteCart(idProduct, idCartDetail) {
-            const obj = {
-                idProduct,
-                idCartDetail
-            }
-            fetch("http://localhost:8080/api/cart/delete", {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(obj)
-            })
-                .then(function (response) {
-                    if (response.ok) {
-
-                        getAllCart();
-
-                    } else {
-                        alert("Failed to add product to cart.");
+            Swal.fire({
+                title: "Are you sure to remove this cart item?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const obj = {
+                        idProduct,
+                        idCartDetail
                     }
-                })
-                .catch(function (error) {
-                    console.error("API call error:", error);
-                });
+                    fetch("http://localhost:8080/api/cart/delete", {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                        .then(function (response) {
+                            if (response.ok) {
+                                toastr.success("delete success")
+                                getAllCart();
+                            } else {
+                            }
+                        })
+                        .catch(function (error) {
+                            toastr.error("API call error:", error);
+                        });
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your cart item has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+
         }
 
         checkout.addEventListener("click",()=>{
@@ -315,18 +339,20 @@
             })
                 .then(function (response) {
                     if (response.ok) {
-                        alert("Order Success")
+                        toastr.success("Order Success")
                         getAllCart();
 
                     } else {
-                        alert("Failed to add product to cart.");
+                        toastr.error("Failed to add product to cart.");
                     }
                 })
                 .catch(function (error) {
-                    console.error("API call error:", error);
+                    toastr.error("API call error:", error);
                 });
 
         })
+
+
 
         getAllCart()
     </script>

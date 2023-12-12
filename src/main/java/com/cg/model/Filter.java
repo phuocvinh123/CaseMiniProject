@@ -1,6 +1,6 @@
 package com.cg.model;
 
-import com.cg.model.dto.FilterDTO;
+import com.cg.model.dto.reponse.FilterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

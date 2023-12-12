@@ -1,4 +1,4 @@
-package com.cg.model.dto;
+package com.cg.model.dto.request;
 
 import com.cg.model.CustomerInfo;
 import com.cg.model.CartDetail;

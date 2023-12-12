@@ -13,7 +13,14 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <style>
+       .hide{
+           display: none;
+       }
+   </style>
+
 </head>
+
 <body>
 <div class="root">
     <div class="container">
@@ -44,10 +51,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12"><h5>Order Management</h5>
-                            <table class="table table-striped order-table">
+                            <table class="table table-striped order-table" id="tbOrderList">
                                 <thead>
                                 <tr>
-                                    <th class="text-end align-middle">Order Date</th>
+<!--                                    <th class="text-end align-middle">Order Date</th>-->
                                     <th class="text-end align-middle">Total Products</th>
                                     <th class="text-end align-middle">Subtotal</th>
                                     <th class="text-end align-middle">Shipping</th>
@@ -57,20 +64,8 @@
                                     <th class="text-end align-middle">Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tbOrderList">
-<!--                                <tr>-->
-<!--                                    <td class="text-end align-middle">Nov 29 2023</td>-->
-<!--                                    <td class="text-end align-middle">3</td>-->
-<!--                                    <td class="text-end align-middle">$600</td>-->
-<!--                                    <td class="text-end align-middle">Free</td>-->
-<!--                                    <td class="text-end align-middle">$600</td>-->
-<!--                                    <td class="text-end align-middle"><span class="badge bg-secondary">draft</span></td>-->
-<!--                                    <td class="text-start align-middle">Khoa Nguyễn</td>-->
-<!--                                    <td class="text-end align-middle"><i class="fa-solid fa-ellipsis-vertical"></i>-->
+                                <tbody >
 
-
-<!--                                    </td>-->
-<!--                                </tr>-->
                                 </tbody>
                             </table>
                         </div>

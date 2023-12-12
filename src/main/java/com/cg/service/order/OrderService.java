@@ -1,6 +1,6 @@
 package com.cg.service.order;
 
-import com.cg.model.dto.OrderDetailDTO;
+import com.cg.model.dto.reponse.OrderDTO;
 import com.cg.model.Order;
 import com.cg.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +36,9 @@ public class OrderService implements IOrderService {
         orderRepository.deleteById(id);
     }
 
+
     @Override
-    public List<OrderDetailDTO> getAllOrderDetailDTO() {
+    public List<OrderDTO> getAllOrderDetailDTO() {
         return orderRepository.getAllOrderDetailDTO();
-//        return null;
     }
 }

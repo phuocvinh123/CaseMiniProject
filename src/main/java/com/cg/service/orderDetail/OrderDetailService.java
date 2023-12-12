@@ -1,6 +1,7 @@
 package com.cg.service.orderDetail;
 
 import com.cg.model.OrderDetail;
+import com.cg.model.dto.reponse.OrderDetailDTO;
 import com.cg.repository.OrderDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,8 @@ public class OrderDetailService implements IOrderDetailService{
     }
 
 
+//    @Override
+//    public List<OrderDetailDTO> getAllOrderDetail() {
+//        return orderDetailRepository.getAllOrderDetail();
+//    }
 }
