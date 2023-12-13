@@ -38,9 +38,33 @@ page.loadData.getAllOrderList = async () => {
                                     <td class="text-end align-middle"><span class="badge bg-secondary">${order.status}</span></td>
                                     <td class="text-start align-middle">${order.customerInfo.fullName}</td>
                                     <td class="text-end align-middle ">
-                                    <i class="fa-solid fa-ellipsis-vertical" ></i>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <i class="fa-solid fa-list  "></i>
+                                    </button>
+                                     
                                     
-                                    <div class="hide">
+                                    
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                   <div class="modal-content">
+                                   <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Order details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                               </div>
+                               <div class="modal-body">
+        ...
+                              </div>
+                            <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Understood</button>
+                         </div>
+                             </div>
+                           </div>
+                          </div>
+                                    
+                                    
+                                    
+                                    <div>
                                     <div class="col-lg-5 border p-2 rounded">
                                     <div class="d-flex align-items-center justify-content-between border-bottom">
                                     <h5>Order details</h5>
@@ -93,6 +117,7 @@ page.loadData.getAllOrderList = async () => {
                                     <td class="text-end align-middle">$200</td>
                                     <td class="text-end align-middle fw-bolder">$200</td>
                                     </tr>
+                                    
     `;
 }
 

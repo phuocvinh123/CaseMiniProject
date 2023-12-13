@@ -3,8 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    th{
+        background-color: #2686e6 !important;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
 </head>
 <body>
+<div id="root">
+    <div class="Toastify"></div>
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
+            <div class="d-flex align-items-center" style="min-width: 180px;">
+                <a class="logo" href="/product">
+                <i class="fa-solid fa-cart-plus"></i>
+                Dashoard</a></div>
+            <div>
+                <a href="#">
 
+                </a>
+            </div>
+        </div>
+        <div class="d-flex py-2">
+            <div style="min-width: 180px;">
+                <div class=""><h5>Menu</h5>
+                    <div class="d-flex flex-column"><a class="menu d-flex align-items-center"
+                                                       href="/admin/order">
+                        <span> <i class="fa-solid fa-cart-plus"></i> </span>
+                        Order List</a>
+                        <a aria-current="page" class="menu d-flex align-items-center active" href="/admin/product-list">
+                            <span>  <i class="fa-solid fa-sitemap"></i></span>
+                        Products</a></div>
+                </div>
+            </div>
+            <div class="flex-grow-1">
+                <div class="container">
+                    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <form>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label">Title</label>
+                                                    <input type="text" class="form-control form-control-sm" placeholder="Title" id="title" name="title">
+                                                    <span class="invalid-feedback"></span>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label">Price</label>
+                                                    <input type="text" class="form-control form-control-sm" placeholder="Price" id="price" name="price">
+                                                    <span class="invalid-feedback"></span>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label">Color</label>
+                                                    <select class="form-select form-select-sm" id="color" name="color">
+                                                        <option value="" disabled selected>Please select color</option>
+                                                        <option value="1">Black</option>
+                                                        <option value="2">Blue</option>
+                                                        <option value="3">Red</option>
+                                                        <option value="4">Green</option>
+                                                        <option value="5">White</option>
+                                                    </select>
+                                                    <span class="invalid-feedback"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label">Category</label>
+                                                    <select class="form-select form-select-sm" id="category" name="category">
+                                                        <option value="" disabled selected>Please select category</option>
+                                                        <option value="1">Sneakers</option>
+                                                        <option value="2">Flats</option>
+                                                        <option value="3">Sandals</option>
+                                                        <option value="4">Heels</option>
+                                                    </select>
+                                                    <span class="invalid-feedback"></span>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label">Company</label>
+                                                    <select class="form-select form-select-sm" id="company" name="company">
+                                                        <option value="" disabled selected>Please select company</option>
+                                                        <option value="1">Nike</option>
+                                                        <option value="2">Adidas</option>
+                                                        <option value="3">Puma</option>
+                                                        <option value="4">Vans</option>
+                                                    </select>
+                                                    <span class="invalid-feedback"></span>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                        <label id="images" for="file">
+                                                            <img class="avatar-preview" src="/assets/img/a.jpg" style="height: 100px; width: 100px"/>
+                                                            <input id="file" class="d-none" type="file" multiple="multiple"  onchange="previewImage(event)">
+                                                        </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" id="createProduct" class="btn btn-success">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product List Management -->
+                    <div class="row product-title">
+                        <div class="col-lg-12 d-flex align-items-center justify-content-between">
+                            <h5>Product List Management</h5>
+                            <button class="btn btn-warning btn-sm d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                <i class="fa-solid fa-plus"></i>
+                                Add new Product
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row product-list">
+                        <div class="col-md-12 d-flex align-items-center my-2">
+                            <div class="d-flex align-items-center"><span class="me-2">Field</span><select
+                                    class="form-select form-select-sm">
+                                <option value="id" selected="">Id</option>
+                                <option value="title">Title</option>
+                                <option value="category">Category</option>
+                                <option value="color">Color</option>
+                                <option value="company">Company</option>
+                            </select></div>
+                            <div class="d-flex align-items-center"><span class="mx-2">Order</span><select
+                                    class="form-select form-select-sm">
+                                <option value="asc" selected="">Ascendent</option>
+                                <option value="desc">Descendent</option>
+                            </select></div>
+                        </div>
+                        <table class="table table-striped product-table" id="product-list">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Title</th>
+                                <th class="text-start">Color</th>
+                                <th class="text-start">Category</th>
+                                <th class="text-start">Company</th>
+                                <th class="text-end">Price</th>
+                                <th class="text-center">Rate</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+
+                        </table>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <ul class="pagination my-0">
+                                <li class="page-item  disabled">
+                                    <button class="page-link">Previous</button>
+                                </li>
+                                <li class="page-item active ">
+                                    <button class="page-link">Next</button>
+                                </li>
+                            </ul>
+                            <div class="d-flex align-items-center"><span
+                                    style="width: 120px;">Items per page</span><select class="form-control"
+                                                                                       style="width: 50px;">
+                                <option value="10" selected="">10</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/myJs/product-list.js"></script>
 </body>
 </html>

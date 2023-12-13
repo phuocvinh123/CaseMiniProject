@@ -18,6 +18,10 @@
 #selectOption option {
     text-align: center;
 }
-th{
-   background-color: #2686e6;
+body {
+    font-family: 'Poppins', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: black;
 }

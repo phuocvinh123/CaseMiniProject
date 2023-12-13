@@ -19,7 +19,12 @@ public class productController {
     }
 
 @GetMapping("/admin/order")
-public String showAdmin(){
+public String showOrder(){
     return "/admin/order";
 }
+
+    @GetMapping("/admin/product-list")
+    public String showProductList(){
+        return "/admin/product-list";
+    }
 }

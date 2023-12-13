@@ -1,9 +1,11 @@
 package com.cg.model;
 
+import com.cg.model.dto.reponse.ProductRepDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table(name = "products")
+@Accessors(chain = true)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +41,13 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "id",nullable = false)
     private Category category;
 
+    public ProductRepDTO toProductRepDTO(){
+        return new ProductRepDTO()
+                .setTitle(title)
+                .setPrice(newPrice)
+                .setColor(color)
+                .setCategory(category)
+                .setCompany(company)
+                .setImg(img);
+    }
 }
